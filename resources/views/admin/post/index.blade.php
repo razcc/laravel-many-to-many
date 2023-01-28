@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<div>
+    <h3>
+        <a href="{{ route('admin.posts.create') }}">Create post</a>
+    </h3>
+</div>
     <table class="table">
         <thead>
             <tr>
@@ -30,4 +35,6 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $all_post->links() }}
 @endsection

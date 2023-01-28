@@ -15,7 +15,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $all_post = Post::All();
+        $all_post = Post::paginate(10);
 
         return view('admin.post.index', compact('all_post'));
     }
@@ -27,7 +27,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.post.create');
     }
 
     /**
@@ -38,7 +38,14 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $new_record = new post();
+        $new_record->fill($data);
+        $new_record->save();
+
+        return redirect()->route('admin.posts.index');
+
     }
 
     /**
