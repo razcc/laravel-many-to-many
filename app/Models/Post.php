@@ -11,7 +11,6 @@ class Post extends Model
         'description',
         'category_id',
         'user_id',
-        'tag_id'
     ];
 
     // Relazione Category

@@ -35,6 +35,20 @@
             @endforeach
         </select>
 
+        {{-- Tags --}}
+        <div class="mb-3">
+            <label>Tags:</label>
+            
+            @foreach ($tags as $tag )
+                <label for="">
+                    <input type="checkbox" name="tags[]" value="{{ $tag['id'] }}">
+                    {{ $tag['name'] }}
+                </label>
+            @endforeach
+        </div>
+
+
+
         {{-- INVIO --}}
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

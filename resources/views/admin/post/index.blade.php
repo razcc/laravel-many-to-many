@@ -14,7 +14,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
                 <th scope="col">CategoryID</th>
-                
+                <th scope="col">Tags</th>
                 <th scope="col">Actioon</th>
             </tr>
         </thead>
@@ -22,7 +22,7 @@
             @foreach ($all_post as $post)
                 <tr>
                     <td>{{ $post['id'] }}</td>
-                    {{-- <td>{{ $post }}</td> --}}
+
                     {{-- Show --}}
                     <td>
                         <a href="{{ route('admin.posts.show', $post['id']) }}">
@@ -30,7 +30,15 @@
                         </a>
                     </td>
                     <td>{{ $post['description'] }}</td>
-                    <td>{{ $post['category']['name'] ?? ''}}</td>
+                    <td>{{ $post['category']['name'] ?? '' }}</td>
+
+                    {{-- Tags --}}
+                    <td>
+                        @foreach ($post['tags'] as $elem )
+                            {{$elem['name']}}
+                        @endforeach
+
+                    </td>
 
                     {{-- Edit --}}
                     <td>
@@ -51,5 +59,4 @@
     </table>
 
     {{ $all_post->links() }}
-
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -16,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $all_post = Post::with('category', 'users')->paginate(10);
+        $all_post = Post::with('category', 'users', 'tags')->paginate(10);
         
         return view('admin.post.index', compact('all_post'));
     }
@@ -29,7 +30,8 @@ class PostsController extends Controller
     public function create()
     {
         $categories = Category::All();
-        return view('admin.post.create', compact('categories'));
+        $tags = Tag::All();
+        return view('admin.post.create', compact('categories', 'tags'));
     }
 
     /**
@@ -58,6 +60,10 @@ class PostsController extends Controller
         $new_record->fill($data);
         $new_record->save();
 
+        if(array_key_exists('tags', $data)){
+            $new_record->tags()->sync($data['tags']);
+        }
+
         return redirect()->route('admin.posts.index');
 
     }
@@ -85,8 +91,9 @@ class PostsController extends Controller
     {
         $single_post_edit = Post::findOrFail($id);
         $categories = Category::All();
+        $tags = Tag::All();
         
-        return view('admin.post.edit', compact('single_post_edit', 'categories'));
+        return view('admin.post.edit', compact('single_post_edit', 'categories', 'tags'));
     }
 
     /**
@@ -113,6 +120,14 @@ class PostsController extends Controller
             ]
             );
         $singolo_post->update($data);
+
+
+        if(array_key_exists('tags', $data)){
+            $singolo_post->tags()->sync($data['tags']);
+        } else {
+            $singolo_post->tags()->sync([]);
+        }
+
         return redirect()->route('admin.posts.index');
     }
 
@@ -125,6 +140,7 @@ class PostsController extends Controller
     public function destroy($id)
     {
         $data = Post::findOrFail($id);
+        $data->tags()->sync([]);
         $data->delete();
         return redirect()->route('admin.posts.index');
     }

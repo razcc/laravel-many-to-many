@@ -20,9 +20,9 @@ class TagSeeder extends Seeder
         ];
 
         foreach($tags as $tag){
-            $new_record = new Tag();
-            $new_record->name = $tag;
-            $new_record->save();
+            $new_tag = new Tag();
+            $new_tag->name = $tag;
+            $new_tag->save();
         }
     }
 }
