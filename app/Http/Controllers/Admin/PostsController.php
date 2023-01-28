@@ -16,7 +16,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $all_post = Post::with('category')->paginate(10);
+        $all_post = Post::with('category', 'users')->paginate(10);
         
         return view('admin.post.index', compact('all_post'));
     }
