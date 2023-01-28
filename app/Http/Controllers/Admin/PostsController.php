@@ -81,7 +81,9 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $single_post_edit = Post::findOrFail($id);
+
+        return view('admin.post.edit', compact('single_post_edit'));
     }
 
     /**
@@ -93,7 +95,22 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $singolo_post = Post::findOrFail($id);
+        $request->validate(
+            [
+                'title' => 'required|max:50',
+                'description' => 'required|max:250'
+            ],
+            //IN QUESTA PARTE SI POSSONO DARE MESAGGI PERSONALIZZATI IN BASE ALLA VALIDAZIONE => .required -- .max -- etc...
+            [
+                'title.required' => 'Attenzione il campo title è obbligatorio',
+                'title.max' => 'Attenzione il campo non deve superare i 50 caratteri',
+                'description.max' => 'Non si possono avere piu di 250 caratteri'
+            ]
+            );
+        $singolo_post->update($data);
+        return redirect()->route('admin.posts.index');
     }
 
     /**
