@@ -27,6 +27,15 @@
             </div>
         @enderror
 
+        {{-- Select Categories --}}
+        <select name="category_id">
+            <option value="">Scelgi Categoria Post</option>
+
+            @foreach ($categories as $elem )
+                <option value="{{ $elem['id'] }}" {{ $elem['id'] == old('category_id', $single_post_edit['category_id']) ? 'selected' : '' }}>{{ $elem['name'] }}</option>
+            @endforeach
+        </select>
+
         {{-- INVIO --}}
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
