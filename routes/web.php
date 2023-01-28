@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -17,6 +18,8 @@ Auth::routes();
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/', 'HomeController@index')->name('index');
+
+    Route::resource('/posts', postsController::class);
 });
 
 Route::get('{any?}', function () {
