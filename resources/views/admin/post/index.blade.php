@@ -12,6 +12,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Title</th>
                 <th scope="col">Description</th>
+                <th scope="col">CategoryID</th>
                 <th scope="col">Actioon</th>
             </tr>
         </thead>
@@ -26,6 +27,7 @@
                         </a>
                     </td>
                     <td>{{ $post['description'] }}</td>
+                    <td>{{ $post['categoryId'] }}</td>
 
                     {{-- Edit --}}
                     <td>

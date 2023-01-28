@@ -10,7 +10,7 @@
             <input name="title" type="string" class="form-control">
             @error('title')
                 <div>
-                    {{$message}}
+                    {{ $message }}
                 </div>
             @enderror
         </div>
@@ -21,10 +21,19 @@
             <input name="description" type="text" class="form-control">
         </div>
         @error('description')
-        <div>
-            {{$message}}
-        </div>
-    @enderror
+            <div>
+                {{ $message }}
+            </div>
+        @enderror
+
+        {{-- Select Categories --}}
+        <select name="categoryId">
+            <option value="">Scelgi Categoria Post</option>
+
+            @foreach ($categories as $elem )
+                <option value="{{ $elem['id'] }}">{{ $elem['name'] }}</option>
+            @endforeach
+        </select>
 
         {{-- INVIO --}}
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -16,7 +16,7 @@ class UpdateAddFkPostsTable extends Migration
         Schema::table('posts', function (Blueprint $table) {
             $table->unsignedBigInteger('categoryId')->nullable();
 
-            $table->foreign('categoryId')->references('id')->on('categories')->onDelete('set nell');
+            $table->foreign('categoryId')->references('id')->on('categories')->onDelete('set null');
         
         });
     }
