@@ -11,23 +11,17 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($all_post as $post )
             <tr>
-                <td>{{ $post['id'] }}</td>
-                {{-- Show --}}
-                <td>
-                    <a href="{{ route('admin.posts.show', $post['id']) }}">
-                        {{ $post['title'] }}
-                    </a>       
-                </td>
-                <td>{{ $post['description'] }}</td>
+                <td>{{ $single_post['id'] }}</td>
+                <td>{{ $single_post['title'] }}</td>
+                <td>{{ $single_post['description'] }}</td>
                 
                 {{-- Edit --}}
                 <td>
-                    <a href="{{ route('admin.posts.edit', $post['id']) }}">Edit</a>    
+                    <a href="{{ route('admin.posts.edit', $single_post['id']) }}">Edit</a>    
                 </td>
             </tr>
-            @endforeach
+
         </tbody>
     </table>
 @endsection
