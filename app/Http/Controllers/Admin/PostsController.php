@@ -40,6 +40,18 @@ class PostsController extends Controller
     {
         $data = $request->all();
 
+        $request->validate(
+            [
+                'title' => 'required|max:50',
+                'description' => 'required|max:250'
+            ],
+            //IN QUESTA PARTE SI POSSONO DARE MESAGGI PERSONALIZZATI IN BASE ALLA VALIDAZIONE => .required -- .max -- etc...
+            [
+                'title.required' => 'Attenzione il campo title è obbligatorio',
+                'title.max' => 'Attenzione il campo non deve superare i 50 caratteri',
+                'description.max' => 'Non si possono avere piu di 250 caratteri'
+            ]
+            );
         $new_record = new post();
         $new_record->fill($data);
         $new_record->save();

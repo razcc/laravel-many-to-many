@@ -8,7 +8,11 @@
         <div class="mb-3">
             <label class="form-label">Title</label>
             <input name="title" type="string" class="form-control">
-
+            @error('title')
+                <div>
+                    {{$message}}
+                </div>
+            @enderror
         </div>
 
         {{-- Description --}}
@@ -16,7 +20,11 @@
             <label class="form-label">Description</label>
             <input name="description" type="text" class="form-control">
         </div>
-
+        @error('description')
+        <div>
+            {{$message}}
+        </div>
+    @enderror
 
         {{-- INVIO --}}
         <button type="submit" class="btn btn-primary">Submit</button>
