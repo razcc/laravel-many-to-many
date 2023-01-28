@@ -27,7 +27,7 @@
         @enderror
 
         {{-- Select Categories --}}
-        <select name="categoryId">
+        <select name="category_id">
             <option value="">Scelgi Categoria Post</option>
 
             @foreach ($categories as $elem )

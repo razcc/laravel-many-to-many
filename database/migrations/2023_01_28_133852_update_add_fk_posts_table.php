@@ -14,10 +14,8 @@ class UpdateAddFkPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('categoryId')->nullable();
-
-            $table->foreign('categoryId')->references('id')->on('categories')->onDelete('set null');
-        
+            $table->unsignedBigInteger('category_id')->nullable();
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
         });
     }
 
@@ -29,9 +27,9 @@ class UpdateAddFkPostsTable extends Migration
     public function down()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropForeign('posts_categoryId_foreign');
+            $table->dropForeign('posts_category_id_foreign');
 
-            $table->dropColumn('categoryId');
+            $table->dropColumn('category_id');
         });
     }
 }

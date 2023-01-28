@@ -27,7 +27,7 @@
                         </a>
                     </td>
                     <td>{{ $post['description'] }}</td>
-                    <td>{{ $post['categoryId'] }}</td>
+                    <td>{{ $post['category']['name'] ?? ''}}</td>
 
                     {{-- Edit --}}
                     <td>
@@ -48,4 +48,5 @@
     </table>
 
     {{ $all_post->links() }}
+
 @endsection
