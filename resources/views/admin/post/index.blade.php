@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div>
-    <h3>
-        <a href="{{ route('admin.posts.create') }}">Create post</a>
-    </h3>
-</div>
+    <div>
+        <h3>
+            <a href="{{ route('admin.posts.create') }}">Create post</a>
+        </h3>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -16,22 +16,31 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($all_post as $post )
-            <tr>
-                <td>{{ $post['id'] }}</td>
-                {{-- Show --}}
-                <td>
-                    <a href="{{ route('admin.posts.show', $post['id']) }}">
-                        {{ $post['title'] }}
-                    </a>       
-                </td>
-                <td>{{ $post['description'] }}</td>
-                
-                {{-- Edit --}}
-                <td>
-                    <a href="{{ route('admin.posts.edit', $post['id']) }}">Edit</a>    
-                </td>
-            </tr>
+            @foreach ($all_post as $post)
+                <tr>
+                    <td>{{ $post['id'] }}</td>
+                    {{-- Show --}}
+                    <td>
+                        <a href="{{ route('admin.posts.show', $post['id']) }}">
+                            {{ $post['title'] }}
+                        </a>
+                    </td>
+                    <td>{{ $post['description'] }}</td>
+
+                    {{-- Edit --}}
+                    <td>
+                        <a href="{{ route('admin.posts.edit', $post['id']) }}">Edit</a>
+
+                        {{-- Destroy --}}
+                        <form method="POST" action="{{ route('admin.posts.destroy', $post['id']) }}">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Destroy</button>
+                        </form>
+                    </td>
+
+
+                </tr>
             @endforeach
         </tbody>
     </table>
